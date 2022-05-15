@@ -1,18 +1,37 @@
 $text-size: 12pt
 $text-color: #263034
+$placeholder-color: lighten($text-color, 50%)
 $integer-color: #b7624a
 $string-color: #377f88
+$boolean-color: #554297
 
-.keyValueContainer
+body
   font-size: $text-size
   color: $text-color
-  margin-left: 1em
 
-  .value
-    margin-right: 1em
+  .integer
+    color: $integer-color
 
-    &.integer
-      color: $integer-color
+  .string
+    color: $string-color
 
-    &.string
-      color: $string-color
+  .boolean
+    color: $boolean-color
+
+  .commandBuilder
+    font-weight: 500
+    font-size: 2em
+    text-align: center
+
+  .keyValueContainer
+    margin-left: 1em
+
+    .value
+      margin-right: 1em
+
+    .keyValueControlContainer
+      margin-top: 0.75em
+
+      .placeholder
+        color: $placeholder-color
+        font-style: italic

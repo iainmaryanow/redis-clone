@@ -12,8 +12,10 @@ const ValueLabel = ({ value }) => {
         { value }
       </span>
       <Tag>{ type }</Tag>
-
-      { type === 'integer' && <Button size='small' shape='round' icon={ <PlusOutlined /> }>Increment</Button> }
+      {
+        type === 'integer' &&
+        <Button size='small' shape='round' icon={ <PlusOutlined /> }>Increment</Button>
+      }
     </>
   )
 }
