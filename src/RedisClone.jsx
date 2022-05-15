@@ -1,28 +1,25 @@
 import { useState } from 'react'
 
-import KeyLabel from './KeyLabel'
-import ValueLabel from './ValueLabel'
+import styles from './styles.module.sass'
+import Controls from './Controls'
+import KeyValuePair from './KeyValuePair'
 
 const RedisClone = () => {
-  const [cache, setCache] = useState({
-    'ab': 'def',
-    'ef': 100
-  })
+  const [cache, setCache] = useState({})
 
   return (
     <pre>
-      {
-        Object.entries(cache).map(([key, value]) => {
-          return (
-            <>
-              <KeyLabel label={ key } indentation={ 0 } />
-              :&nbsp;
-              <ValueLabel value={ value } />
-              <br />
-            </>
+      <Controls />
+
+      <div>{ '{' }</div>
+      <div className={ styles.keyValueContainer }>
+        {
+          Object.entries(cache).map(
+            ([key, value]) => <KeyValuePair keyLabel={ key } valueLabel={ value } key={ key } />
           )
-        })
-      }
+        }
+      </div>
+      <div>{ '}' }</div>
     </pre>
   )
 }
