@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 
 import styles from './styles.module.sass'
 import CommandBuilder from './command-builder/CommandBuilder'
-import KeyValuePair from './KeyValuePair'
-import KeyValueControl from './KeyValueControl'
+import KeyValuePair from './key-values/KeyValuePair'
+import KeyValueControl from './key-values/KeyValueControl'
+import cacheReducer from './reducers/cacheReducer'
 
 const RedisClone = () => {
-  const [cache, setCache] = useState({ abc: 'def', ghi: 100 })
-  const [command, setCommand] = useState({ name: 'SET' })
+  const [cache, dispatchCache] = useReducer(cacheReducer, { abc: '123', def: 321 })
+  const [command, setCommand] = useState(null)
 
   return (
     <>
@@ -17,10 +18,20 @@ const RedisClone = () => {
         <div className={ styles.keyValueContainer }>
           {
             Object.entries(cache).map(
-              ([key, value]) => <KeyValuePair keyLabel={ key } valueLabel={ value } key={ key } />
+              ([key, value]) => {
+                return (
+                  <KeyValuePair
+                    key={ key }
+                    keyLabel={ key }
+                    valueLabel={ value }
+                    onClick={ () => setCommand('INCR') }
+                  />
+                )
+              }
             )
           }
-          <KeyValueControl />
+
+          <KeyValueControl onClick={ () => setCommand('SET') }/>
         </div>
         <div>{ '}' }</div>
       </pre>

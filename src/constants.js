@@ -1,3 +1,8 @@
+export const VALUE_TYPE = {
+  INTEGER: 'integer',
+  STRING: 'string'
+}
+
 export const COMMAND_SCHEMAS = {
   GET: {
     requiredValues: [

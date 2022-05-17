@@ -4,11 +4,15 @@ import GroupValues from './GroupValues'
 import ModifiableValue from './ModifiableValue'
 
 const CommandBuilder = ({ command }) => {
-  const schema = COMMAND_SCHEMAS[command.name]
+  const schema = COMMAND_SCHEMAS[command]
+
+  if (!schema) {
+    return null
+  }
 
   return (
     <div className={ styles.commandBuilder }>
-      <span>{ command.name }</span>
+      <span>{ command }</span>
       {
         schema.requiredValues.map((valueDefinition, index) => {
           return (
