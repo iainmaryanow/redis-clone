@@ -1,11 +1,8 @@
-const cache = {
-  'abc': {
-    value: 'def',
-    timeout: setTimeout(() => delete cache['abc'], 5000)
-  }
-}
+let cache = {}
 
 const isPotentialInteger = (value) => !isNaN(parseInt(Number(value)))
+
+const reset = () => cache = {}
 
 const get = (key) => {
   return cache.hasOwnProperty(key) ? cache[key].value : undefined
@@ -49,5 +46,6 @@ const incr = (key) => {
 module.exports = {
   set,
   get,
-  incr
+  incr,
+  reset
 }

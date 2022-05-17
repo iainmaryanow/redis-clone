@@ -21,8 +21,9 @@
     "start": "concurrently 'yarn:start-server' 'yarn:start-client'",
     "start-server": "nodemon server/server.js",
     "start-client": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test-server": "jest ./server",
+    "test-client": "react-scripts test",
+    "build": "react-scripts build"
   },
   "nodemonConfig": {
     "watch": "./server/"

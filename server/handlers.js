@@ -33,11 +33,11 @@ const set = async (ctx, next) => {
 const incr = async (ctx, next) => {
   try {
     ctx.body = ctx.cache.incr(ctx.query.key)
-    await next()
   } catch (error) {
     ctx.body = error.message
-    await next()
   }
+
+  await next()
 }
 
 module.exports = {
