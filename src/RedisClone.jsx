@@ -7,12 +7,13 @@ import KeyValueControl from './key-values/KeyValueControl'
 import cacheReducer from './reducers/cacheReducer'
 
 const RedisClone = () => {
-  const [cache, dispatchCache] = useReducer(cacheReducer, { abc: '123', def: 321 })
+  const [cache, dispatchCache] = useReducer(cacheReducer, { first: 'hello', another: 321 })
   const [command, setCommand] = useState(null)
 
   return (
     <>
       <CommandBuilder command={ command } />
+
       <pre>
         <div>{ '{' }</div>
         <div className={ styles.keyValueContainer }>
@@ -24,14 +25,14 @@ const RedisClone = () => {
                     key={ key }
                     keyLabel={ key }
                     valueLabel={ value }
-                    onClick={ () => setCommand('INCR') }
+                    onClick={ () => setCommand({ type: 'INCR', key }) }
                   />
                 )
               }
             )
           }
 
-          <KeyValueControl onClick={ () => setCommand('SET') }/>
+          <KeyValueControl onClick={ () => setCommand({ type: 'SET' }) }/>
         </div>
         <div>{ '}' }</div>
       </pre>

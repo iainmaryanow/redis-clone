@@ -1,5 +1,4 @@
-import { Button } from 'antd'
-import { PlusOutlined } from '@ant-design/icons'
+import { Button } from 'semantic-ui-react'
 
 import styles from '../styles.module.sass'
 import getValueType from './getValueType'
@@ -15,12 +14,7 @@ const ValueLabel = ({ value, onClick }) => {
 
       {
         type === VALUE_TYPE.INTEGER &&
-        <Button
-          size='small'
-          shape='round'
-          icon={ <PlusOutlined /> }
-          onClick={ onClick }
-        >
+        <Button compact size='small' onClick={ onClick }>
           Increment
         </Button>
       }

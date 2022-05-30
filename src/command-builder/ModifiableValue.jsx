@@ -1,8 +1,8 @@
 import styles from '../styles.module.sass'
 
-const ModifiableValue = ({ valueDefinition }) => {
+const ModifiableValue = ({ valueDefinition, defaultValue }) => {
   return <span className={ styles[valueDefinition.type] }>
-    { valueDefinition.name }
+    { defaultValue ?? valueDefinition.name }
   </span>
 }
 
