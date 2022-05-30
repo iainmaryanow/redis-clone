@@ -1,4 +1,7 @@
 $text-size: 12pt
+$small-text: 0.5em
+$big-text: 1.5em
+
 $text-color: #263034
 $placeholder-color: lighten($text-color, 50%)
 $integer-color: #b7624a
@@ -24,7 +27,22 @@ body
     justify-content: center
     align-items: center
     font-weight: 500
-    font-size: 2em
+
+    .groupValuesContainer
+      display: flex
+
+    .modifiableValue
+      margin: 0 0.25em
+      display: flex
+      flex-direction: column
+      align-items: center
+
+      .valueInput
+        font-size: $big-text
+        max-width: 100px
+
+        input
+          text-align: center
 
     .runCommand
       margin-left: 1em

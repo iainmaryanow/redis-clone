@@ -26,22 +26,18 @@ const CommandBuilder = ({ command }) => {
       {
         schema.requiredValues.map((valueDefinition, index) => {
           return (
-            <span key={ index }>
-              &nbsp;
-              <ModifiableValue valueDefinition={ valueDefinition } defaultValue={ command[valueDefinition.name] } />
-            </span>
+            <ModifiableValue
+              valueDefinition={ valueDefinition }
+              defaultValue={ command[valueDefinition.name] }
+              key={ index }
+            />
           )
         })
       }
 
       {
         schema.optionalGroups.map((optionalGroup, index) => {
-          return (
-            <span key={ index }>
-              &nbsp;
-              <GroupValues group={ optionalGroup } />
-            </span>
-          )
+          return <GroupValues group={ optionalGroup } key={ index } />
         })
       }
 

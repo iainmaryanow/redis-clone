@@ -1,21 +1,24 @@
+import { Fragment } from 'react'
+
+import styles from '../styles.module.sass'
 import ModifiableValue from './ModifiableValue'
 
 const GroupValues = ({ group }) => {
   return (
-    <>
+    <div className={ styles.groupValuesContainer }>
       [
       {
         group.map((valueDefinition, valueIndex) => {
           return (
-            <span key={ valueIndex }>
-              { valueIndex > 0 && <span> | </span> }
+            <Fragment key={ valueIndex }>
+              { valueIndex > 0 && <>|</> }
               <ModifiableValue valueDefinition={ valueDefinition } />
-            </span>
+            </Fragment>
           )
         })
       }
       ]
-    </>
+    </div>
   )
 }
 
