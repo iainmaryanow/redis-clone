@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Input } from 'semantic-ui-react'
 
 import styles from '../styles.module.sass'
@@ -9,7 +8,7 @@ const INPUT_TYPE_MAPPING = {
   integer: 'number'
 }
 
-const ModifiableValue = ({ valueDefinition, defaultValue, isFirst, isLast }) => {
+const ModifiableValue = ({ valueDefinition, defaultValue }) => {
   return (
     <div className={ `${ styles[valueDefinition.type] } ${ styles.modifiableValue }` }>
       <span>{ valueDefinition.name }</span>
