@@ -15,7 +15,6 @@ const ModifiableValue = ({ valueDefinition, defaultValue, isFirst, isLast }) => 
       <span>{ valueDefinition.name }</span>
 
       <Input
-        compact
         size='mini'
         value={ defaultValue ?? undefined }
         type={ INPUT_TYPE_MAPPING[valueDefinition.type] }

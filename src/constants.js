@@ -32,19 +32,19 @@ export const COMMAND_SCHEMAS = {
         {
           name: 'NX',
           type: 'boolean',
-          default: false
+          default: null
         },
         {
           name: 'XX',
           type: 'boolean',
-          default: false
+          default: null
         }
       ],
       [
         {
           name: 'GET',
           type: 'boolean',
-          default: false
+          default: null
         }
       ],
       [
@@ -71,7 +71,7 @@ export const COMMAND_SCHEMAS = {
         {
           name: 'KEEPTTL',
           type: 'boolean',
-          default: false
+          default: null
         }
       ]
     ]
