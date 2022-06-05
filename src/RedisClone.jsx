@@ -15,7 +15,8 @@ const RedisClone = () => {
       <CommandBuilder command={ command } />
 
       <pre>
-        <div>{ '{' }</div>
+        <span>{ '{' }</span>
+
         <div className={ styles.keyValueContainer }>
           {
             Object.entries(cache).map(
@@ -32,9 +33,10 @@ const RedisClone = () => {
             )
           }
 
-          <KeyValueControl onClick={ () => setCommand({ type: 'SET' }) }/>
+          <KeyValueControl onClick={ () => setCommand({ type: 'SET', key: 'key', value: 'value' }) }/>
         </div>
-        <div>{ '}' }</div>
+
+        <span>{ '}' }</span>
       </pre>
     </>
   )

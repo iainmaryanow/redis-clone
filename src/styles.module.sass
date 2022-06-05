@@ -25,20 +25,37 @@ body
   .commandBuilder
     display: flex
     justify-content: center
-    align-items: center
-    font-weight: 500
 
     .groupValuesContainer
       display: flex
+      margin: 0 0.75em
+
+      .modifiableValue
+        &:not(:first-child)
+          border-left: black 1px solid
+
+        &:first-child
+          border-left: black 3px solid
+          border-top-left-radius: 8px
+          border-bottom-left-radius: 8px
+
+        &:last-child
+          border-right: black 3px solid
+          border-top-right-radius: 8px
+          border-bottom-right-radius: 8px
+
+    .commandName
+      font-size: $big-text
+      align-self: center
 
     .modifiableValue
-      margin: 0 0.25em
+      padding: 0 0.75em
       display: flex
       flex-direction: column
       align-items: center
 
       .valueInput
-        font-size: $big-text
+        height: 100%
         max-width: 100px
 
         input

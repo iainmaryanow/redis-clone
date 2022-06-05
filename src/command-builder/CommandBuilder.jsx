@@ -21,7 +21,7 @@ const CommandBuilder = ({ command }) => {
 
   return (
     <div className={ styles.commandBuilder }>
-      <span>{ command.type }</span>
+      <span className={ styles.commandName }>{ command.type }</span>
 
       {
         schema.requiredValues.map((valueDefinition, index) => {
