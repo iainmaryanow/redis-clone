@@ -8,13 +8,13 @@ const ValueLabel = ({ value, onClick }) => {
   const type = getValueType(value)
   return (
     <>
-      <span className={ `${ styles.value } ${ styles[type] }` }>
-        { value }
+      <span className={`${styles.value} ${styles[type]}`}>
+        {value}
       </span>
 
       {
         type === VALUE_TYPE.INTEGER &&
-        <Button compact size='small' onClick={ onClick }>
+        <Button compact size='mini' onClick={onClick}>
           Increment
         </Button>
       }

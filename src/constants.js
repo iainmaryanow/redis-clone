@@ -1,15 +1,21 @@
+export const COMMAND = {
+  'INCR': 'INCR',
+  'GET': 'GET',
+  'SET': 'SET'
+}
+
 export const VALUE_TYPE = {
   INTEGER: 'integer',
   STRING: 'string'
 }
 
-export const COMMAND_SCHEMAS = {
+export const COMMAND_SCHEMA = {
   GET: {
     requiredValues: [
       {
         name: 'key',
         type: 'string',
-        default: ''
+        defaultValue: ''
       }
     ],
     optionalGroups: []
@@ -19,12 +25,12 @@ export const COMMAND_SCHEMAS = {
       {
         name: 'key',
         type: 'string',
-        default: ''
+        defaultValue: ''
       },
       {
         name: 'value',
         type: 'string',
-        default: ''
+        defaultValue: ''
       }
     ],
     optionalGroups: [
@@ -32,46 +38,46 @@ export const COMMAND_SCHEMAS = {
         {
           name: 'NX',
           type: 'boolean',
-          default: null
+          defaultValue: null
         },
         {
           name: 'XX',
           type: 'boolean',
-          default: null
+          defaultValue: null
         }
       ],
       [
         {
           name: 'GET',
           type: 'boolean',
-          default: null
+          defaultValue: null
         }
       ],
       [
         {
           name: 'EX',
           type: 'integer',
-          default: 0
+          defaultValue: 0
         },
         {
           name: 'PX',
           type: 'integer',
-          default: 0
+          defaultValue: 0
         },
         {
           name: 'EXAT',
           type: 'integer',
-          default: 0
+          defaultValue: 0
         },
         {
           name: 'PXAT',
           type: 'integer',
-          default: 0
+          defaultValue: 0
         },
         {
           name: 'KEEPTTL',
           type: 'boolean',
-          default: null
+          defaultValue: null
         }
       ]
     ]
@@ -81,7 +87,7 @@ export const COMMAND_SCHEMAS = {
       {
         name: 'key',
         type: 'string',
-        default: ''
+        defaultValue: ''
       }
     ],
     optionalGroups: []
@@ -91,12 +97,12 @@ export const COMMAND_SCHEMAS = {
       {
         name: 'key',
         type: 'string',
-        default: ''
+        defaultValue: ''
       },
       {
         name: 'increment',
         type: 'integer',
-        default: 1
+        defaultValue: 1
       }
     ],
     optionalGroups: []

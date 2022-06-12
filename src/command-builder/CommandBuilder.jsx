@@ -1,43 +1,40 @@
-import { useState } from 'react'
-
+import { useState, useContext } from 'react'
 import { Button } from 'semantic-ui-react'
-import { COMMAND_SCHEMAS } from '../constants'
+
+import { COMMAND_SCHEMA } from '../constants'
+import { CommandContext } from '../RedisClone'
 import styles from '../styles.module.sass'
 import GroupValues from './GroupValues'
 import ModifiableValue from './ModifiableValue'
 
-const CommandBuilder = ({ command }) => {
-  const [loading, setLoading] = useState(false)
+const CommandBuilder = ({ onChangeCommand, onRunCommand }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const command = useContext(CommandContext)
 
-  const runCommand = () => {
-    setLoading(true)
-    setTimeout(() => setLoading(false), 2500)
+  const runCommand = async () => {
+    setIsLoading(true)
+    await onRunCommand()
+    setIsLoading(false)
   }
 
-  const schema = COMMAND_SCHEMAS[command?.type]
+  const schema = COMMAND_SCHEMA[command?.type]
   if (!schema) {
     return null
   }
 
   return (
-    <div className={ styles.commandBuilder }>
-      <span className={ styles.commandName }>{ command.type }</span>
+    <div className={styles.commandBuilder}>
+      <span className={styles.commandName}>{command.type}</span>
 
       {
         schema.requiredValues.map((valueDefinition, index) => {
-          return (
-            <ModifiableValue
-              valueDefinition={ valueDefinition }
-              defaultValue={ command[valueDefinition.name] }
-              key={ index }
-            />
-          )
+          return <ModifiableValue key={index} valueDefinition={valueDefinition} onChange={onChangeCommand} />
         })
       }
 
       {
         schema.optionalGroups.map((optionalGroup, index) => {
-          return <GroupValues group={ optionalGroup } key={ index } />
+          return <GroupValues key={index} group={optionalGroup} onChange={onChangeCommand} />
         })
       }
 
@@ -45,9 +42,9 @@ const CommandBuilder = ({ command }) => {
         positive
         size='large'
         icon='checkmark'
-        loading={ loading }
-        className={ styles.runCommand }
-        onClick={ runCommand }
+        loading={isLoading}
+        className={styles.runCommand}
+        onClick={runCommand}
       />
     </div>
   )

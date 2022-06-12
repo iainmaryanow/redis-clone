@@ -1,18 +1,12 @@
-import { Fragment } from 'react'
-
 import styles from '../styles.module.sass'
 import ModifiableValue from './ModifiableValue'
 
-const GroupValues = ({ group }) => {
+const GroupValues = ({ group, onChange }) => {
   return (
-    <div className={ styles.groupValuesContainer }>
+    <div className={styles.groupValuesContainer}>
       {
-        group.map((valueDefinition, valueIndex) => {
-          return (
-            <Fragment key={ valueIndex }>
-              <ModifiableValue valueDefinition={ valueDefinition } />
-            </Fragment>
-          )
+        group.map((valueDefinition, index) => {
+          return <ModifiableValue key={index} valueDefinition={valueDefinition} onChange={onChange} />
         })
       }
     </div>
