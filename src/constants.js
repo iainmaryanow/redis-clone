@@ -1,4 +1,5 @@
 export const COMMAND = {
+  'NONE': null,
   'INCR': 'INCR',
   'GET': 'GET',
   'SET': 'SET'

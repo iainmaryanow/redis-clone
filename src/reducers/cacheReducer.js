@@ -1,6 +1,8 @@
-import { COMMAND } from "../constants"
+import { COMMAND } from '../constants'
 
-const cacheReducer = (state, action) => {
+export const INITIAL_CACHE = {}
+
+const cacheReducer = (state = INITIAL_CACHE, action) => {
   switch (action.type) {
     case COMMAND.INCR:
       return {

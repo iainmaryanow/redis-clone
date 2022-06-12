@@ -1,7 +1,12 @@
-import { COMMAND } from "../constants"
+import { COMMAND } from '../constants'
 
-const commandReducer = (state, action) => {
+export const INITIAL_COMMAND = { type: COMMAND.NONE }
+
+const commandReducer = (state = INITIAL_COMMAND, action) => {
   switch (action.type) {
+    case COMMAND.NONE:
+      return {}
+
     case COMMAND.INCR:
       return {
         type: COMMAND.INCR,

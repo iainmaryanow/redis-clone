@@ -1,4 +1,4 @@
-import { VALUE_TYPE } from '../constants'
+import { VALUE_TYPE } from '../../constants'
 
 const getValueType = (value) => {
   if (['string', 'number'].includes(typeof value)) {
