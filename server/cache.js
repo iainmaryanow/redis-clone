@@ -38,9 +38,9 @@ const incr = (key) => {
     const newValue = parseInt(Number(value)) + 1
     cache[key].value = newValue
     return newValue
-  } else {
-    throw new Error(`The value ${ value } for the key ${ key } is not an integer`)
   }
+
+  throw new Error(`The value ${value} for the key ${key} is not an integer`)
 }
 
 module.exports = {

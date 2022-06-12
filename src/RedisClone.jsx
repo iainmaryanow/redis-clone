@@ -4,6 +4,7 @@ import CommandBuilder from './command-builder/CommandBuilder'
 import Cache from './cache/Cache'
 import cacheReducer, { INITIAL_CACHE } from './reducers/cacheReducer'
 import commandReducer, { INITIAL_COMMAND } from './reducers/commandReducer'
+import sendCommand from './api/sendCommand'
 
 export const CommandContext = createContext({})
 
@@ -13,12 +14,14 @@ const RedisClone = () => {
 
   const onChangeCommand = (updates) => dispatchCommand({ ...command, ...updates })
 
-  const onRunCommand = () => {
-    // API
-    // Success - dispatchCache
-    // Failure - show error
-    dispatchCache(command)
-    dispatchCommand(INITIAL_COMMAND)
+  const onRunCommand = async () => {
+    try {
+      await sendCommand(command)
+      dispatchCache(command)
+      dispatchCommand(INITIAL_COMMAND)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (
