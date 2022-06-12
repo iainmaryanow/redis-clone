@@ -7,8 +7,8 @@ const app = new Koa()
 app.context.cache = cache
 app.use(routes)
 
-if (!module.parent) {
+if (!module.children) {
   const PORT = 8001
   app.listen(PORT)
-  console.log(`Listening on port ${ PORT }`)
+  console.log(`Listening on port ${PORT}`)
 }

@@ -7,7 +7,7 @@ const cacheReducer = (state = INITIAL_CACHE, action) => {
     case COMMAND.INCR:
       return {
         ...state,
-        [action.key]: state[action.key] + 1
+        [action.key]: Number(state[action.key]) + 1
       }
 
     case COMMAND.SET:
