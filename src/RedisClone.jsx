@@ -1,10 +1,11 @@
-import { useReducer, createContext } from 'react'
+import { useReducer, createContext, useState } from 'react'
 
 import CommandBuilder from './command-builder/CommandBuilder'
 import Cache from './cache/Cache'
 import cacheReducer, { INITIAL_CACHE } from './reducers/cacheReducer'
 import commandReducer, { INITIAL_COMMAND } from './reducers/commandReducer'
 import sendCommand from './api/sendCommand'
+import Header from './header/Header'
 
 export const CommandContext = createContext({})
 
@@ -12,20 +13,35 @@ const RedisClone = () => {
   const [cache, dispatchCache] = useReducer(cacheReducer, INITIAL_CACHE)
   const [command, dispatchCommand] = useReducer(commandReducer, INITIAL_COMMAND)
 
+  const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+
   const onChangeCommand = (updates) => dispatchCommand({ ...command, ...updates })
 
   const onRunCommand = async () => {
     try {
-      await sendCommand(command)
+      const { data } = await sendCommand(command)
+      setMessage(`Result of ${command.type}: ${data}`)
+      setTimeout(() => setMessage(''), 4000)
+
       dispatchCache(command)
       dispatchCommand(INITIAL_COMMAND)
+
     } catch (error) {
-      console.error(error)
+      let errorMessage = error.message
+      if (error.response?.data) {
+        errorMessage = error.response.data
+      }
+
+      setError(errorMessage)
+      setTimeout(() => setError(''), 4000)
     }
   }
 
   return (
     <>
+      <Header error={error} message={message} />
+
       <CommandContext.Provider value={command}>
         <CommandBuilder onChangeCommand={onChangeCommand} onRunCommand={onRunCommand} />
       </CommandContext.Provider>

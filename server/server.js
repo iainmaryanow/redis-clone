@@ -3,7 +3,6 @@ const routes = require('./routes')
 const cache = require('./cache')
 
 const app = new Koa()
-
 app.context.cache = cache
 app.use(routes)
 

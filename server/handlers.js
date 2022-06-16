@@ -14,7 +14,8 @@ const set = async (ctx, next) => {
   const { key, value, px, nx, xx, keepttl, get } = ctx.query
 
   if ((nx && xx) || (px && keepttl)) {
-    // Bad query
+    ctx.status = 400
+    ctx.body = 'Invalid parameters set'
     return await next()
   }
 
@@ -35,6 +36,29 @@ const incr = async (ctx, next) => {
     ctx.body = ctx.cache.incr(ctx.query.key)
   } catch (error) {
     ctx.body = error.message
+    ctx.status = 500
+  }
+
+  await next()
+}
+
+const decr = async (ctx, next) => {
+  try {
+    ctx.body = ctx.cache.decr(ctx.query.key)
+  } catch (error) {
+    ctx.body = error.message
+    ctx.status = 500
+  }
+
+  await next()
+}
+
+const strlen = async (ctx, next) => {
+  try {
+    ctx.body = ctx.cache.strlen(ctx.query.key)
+  } catch (error) {
+    ctx.body = error.message
+    ctx.status = 500
   }
 
   await next()
@@ -44,5 +68,7 @@ module.exports = {
   ping,
   get,
   set,
-  incr
+  incr,
+  decr,
+  strlen
 }
