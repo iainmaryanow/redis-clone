@@ -1,13 +1,14 @@
 export const COMMAND = {
-  'NONE': null,
-  'INCR': 'INCR',
-  'GET': 'GET',
-  'SET': 'SET'
+  PING: 'PING',
+  INCR: 'INCR',
+  GET: 'GET',
+  SET: 'SET'
 }
 
 export const VALUE_TYPE = {
   NUMBER: 'number',
-  STRING: 'string'
+  STRING: 'string',
+  BOOLEAN: 'boolean'
 }
 
 export const COMMAND_SCHEMA = {
@@ -15,7 +16,7 @@ export const COMMAND_SCHEMA = {
     requiredValues: [
       {
         name: 'key',
-        type: 'string',
+        type: VALUE_TYPE.STRING,
         defaultValue: ''
       }
     ],
@@ -25,59 +26,59 @@ export const COMMAND_SCHEMA = {
     requiredValues: [
       {
         name: 'key',
-        type: 'string',
+        type: VALUE_TYPE.STRING,
         defaultValue: ''
       },
       {
         name: 'value',
-        type: 'string',
+        type: VALUE_TYPE.STRING,
         defaultValue: ''
       }
     ],
     optionalGroups: [
       [
         {
-          name: 'NX',
-          type: 'boolean',
+          name: 'nx',
+          type: VALUE_TYPE.BOOLEAN,
           defaultValue: null
         },
         {
-          name: 'XX',
-          type: 'boolean',
-          defaultValue: null
-        }
-      ],
-      [
-        {
-          name: 'GET',
-          type: 'boolean',
+          name: 'xx',
+          type: VALUE_TYPE.BOOLEAN,
           defaultValue: null
         }
       ],
       [
         {
-          name: 'EX',
-          type: 'number',
+          name: 'get',
+          type: VALUE_TYPE.BOOLEAN,
+          defaultValue: null
+        }
+      ],
+      [
+        {
+          name: 'ex',
+          type: VALUE_TYPE.NUMBER,
           defaultValue: 0
         },
         {
-          name: 'PX',
-          type: 'number',
+          name: 'px',
+          type: VALUE_TYPE.NUMBER,
           defaultValue: 0
         },
         {
-          name: 'EXAT',
-          type: 'number',
+          name: 'exat',
+          type: VALUE_TYPE.NUMBER,
           defaultValue: 0
         },
         {
-          name: 'PXAT',
-          type: 'number',
+          name: 'pxat',
+          type: VALUE_TYPE.NUMBER,
           defaultValue: 0
         },
         {
-          name: 'KEEPTTL',
-          type: 'boolean',
+          name: 'keepttl',
+          type: VALUE_TYPE.BOOLEAN,
           defaultValue: null
         }
       ]
@@ -87,7 +88,7 @@ export const COMMAND_SCHEMA = {
     requiredValues: [
       {
         name: 'key',
-        type: 'string',
+        type: VALUE_TYPE.STRING,
         defaultValue: ''
       }
     ],
@@ -97,12 +98,12 @@ export const COMMAND_SCHEMA = {
     requiredValues: [
       {
         name: 'key',
-        type: 'string',
+        type: VALUE_TYPE.STRING,
         defaultValue: ''
       },
       {
         name: 'increment',
-        type: 'number',
+        type: VALUE_TYPE.NUMBER,
         defaultValue: 1
       }
     ],

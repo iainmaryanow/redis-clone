@@ -1,8 +1,10 @@
 import axios from 'axios'
+import { COMMAND } from '../constants'
 
 const COMMAND_TO_ROUTE_METHOD = {
-  'INCR': 'put',
-  'SET': 'put'
+  [COMMAND.PING]: 'get',
+  [COMMAND.INCR]: 'put',
+  [COMMAND.SET]: 'put'
 }
 
 const sendCommand = ({ type, ...values }) => {

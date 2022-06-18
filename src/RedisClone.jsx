@@ -5,6 +5,7 @@ import Cache from './cache/Cache'
 import commandReducer, { INITIAL_COMMAND } from './reducers/commandReducer'
 import sendCommand from './api/sendCommand'
 import Header from './header/Header'
+import { useEffect } from 'react'
 
 export const CommandContext = createContext({})
 
@@ -14,7 +15,8 @@ const RedisClone = () => {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
-  const onChangeCommand = (updates) => dispatchCommand({ ...command, ...updates })
+  const onChangeCommand = (updates) => { dispatchCommand({ ...command, ...updates }); console.log(updates) }
+  const onNewCommand = (command, props) => dispatchCommand({ type: command, ...props })
 
   const createDisappearingHeader = (fn, content, timeout = 5000) => {
     fn(content)
@@ -24,7 +26,7 @@ const RedisClone = () => {
   const onRunCommand = async () => {
     try {
       const { data } = await sendCommand(command)
-      createDisappearingHeader(setMessage, `Result of ${command.type}: ${data.value}`)
+      createDisappearingHeader(setMessage, `Result of ${command.type}: '${data.value}'`)
       setCache(data.cache)
       dispatchCommand(INITIAL_COMMAND)
 
@@ -32,6 +34,8 @@ const RedisClone = () => {
       createDisappearingHeader(setError, response?.data ? response.data : message)
     }
   }
+
+  useEffect(() => { onRunCommand() }, [])
 
   return (
     <>
@@ -41,7 +45,7 @@ const RedisClone = () => {
         <CommandBuilder onChangeCommand={onChangeCommand} onRunCommand={onRunCommand} />
       </CommandContext.Provider>
 
-      <Cache cache={cache} onNewCommand={(command, props) => dispatchCommand({ type: command, ...props })} />
+      <Cache cache={cache} onNewCommand={onNewCommand} />
     </>
   )
 }

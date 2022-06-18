@@ -1,23 +1,22 @@
 import { COMMAND } from '../constants'
 
-export const INITIAL_COMMAND = { type: COMMAND.NONE }
+export const INITIAL_COMMAND = { type: COMMAND.PING }
 
-const commandReducer = (state = INITIAL_COMMAND, action) => {
-  switch (action.type) {
-    case COMMAND.NONE:
-      return {}
+const commandReducer = (state = INITIAL_COMMAND, { type, ...params }) => {
+  switch (type) {
+    case COMMAND.PING:
+      return { type: COMMAND.PING }
 
     case COMMAND.INCR:
       return {
         type: COMMAND.INCR,
-        key: action.key
+        ...params
       }
 
     case COMMAND.SET:
       return {
         type: COMMAND.SET,
-        key: action.key,
-        value: action.value
+        ...params
       }
 
     default:

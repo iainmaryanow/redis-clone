@@ -15,14 +15,14 @@ const set = async (ctx, next) => {
 
   if ((nx && xx) || (px && keepttl)) {
     ctx.status = 400
-    ctx.body = 'Invalid parameters set'
+    ctx.body = 'Invalid parameters'
     return await next()
   }
 
-  const oldValue = ctx.cache.get(key)
+  const oldValue = ctx.cache.get(key) ?? ''
 
   if ((nx && oldValue) || (xx && !oldValue)) {
-    ctx.body = undefined
+    ctx.body = ''
   } else {
     const isSuccessful = ctx.cache.set(key, value, px, keepttl)
     ctx.body = get ? oldValue : isSuccessful
