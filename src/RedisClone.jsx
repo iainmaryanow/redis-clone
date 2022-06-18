@@ -12,29 +12,25 @@ export const CommandContext = createContext({})
 const RedisClone = () => {
   const [cache, dispatchCache] = useReducer(cacheReducer, INITIAL_CACHE)
   const [command, dispatchCommand] = useReducer(commandReducer, INITIAL_COMMAND)
-
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
   const onChangeCommand = (updates) => dispatchCommand({ ...command, ...updates })
 
+  const createDisappearingHeader = (fn, content, timeout = 5000) => {
+    fn(content)
+    setTimeout(() => fn(''), timeout)
+  }
+
   const onRunCommand = async () => {
     try {
       const { data } = await sendCommand(command)
-      setMessage(`Result of ${command.type}: ${data}`)
-      setTimeout(() => setMessage(''), 4000)
-
+      createDisappearingHeader(setMessage, `Result of ${command.type}: ${data.value}`)
       dispatchCache(command)
       dispatchCommand(INITIAL_COMMAND)
 
-    } catch (error) {
-      let errorMessage = error.message
-      if (error.response?.data) {
-        errorMessage = error.response.data
-      }
-
-      setError(errorMessage)
-      setTimeout(() => setError(''), 4000)
+    } catch ({ response, message }) {
+      createDisappearingHeader(setError, response?.data ? response.data : message)
     }
   }
 

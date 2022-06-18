@@ -9,4 +9,12 @@ router.put('/INCR', incr)
 router.put('/DECR', decr)
 router.get('/STRLEN', strlen)
 
+router.use(async (ctx, next) => {
+  ctx.body = {
+    value: ctx.body,
+    cache: ctx.cache.serialize()
+  }
+  await next()
+})
+
 module.exports = router.routes()

@@ -1,8 +1,10 @@
+const isPotentialInteger = require('./utils/isPotentialInteger')
+const serializeCache = require('./utils/serializeCache')
+
 let cache = {}
 
-const isPotentialInteger = (value) => !isNaN(parseInt(Number(value)))
-
 const reset = () => cache = {}
+const serialize = () => serializeCache(cache)
 
 const get = (key) => {
   return cache.hasOwnProperty(key) ? cache[key].value : undefined
@@ -72,6 +74,7 @@ const strlen = (key) => {
 }
 
 module.exports = {
+  serialize,
   set,
   get,
   incr,
