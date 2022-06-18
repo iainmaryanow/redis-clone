@@ -13,7 +13,7 @@ const Cache = ({ cache, onNewCommand }) => {
       <div className={styles.keyValueContainer}>
         {
           Object.entries(cache).map(([key, value]) => {
-            return <KeyValuePair key={key} keyLabel={key} valueLabel={value} onCommandClick={onClick} />
+            return <KeyValuePair key={key} keyLabel={key} value={value} onCommandClick={onClick} />
           })
         }
 

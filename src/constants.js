@@ -6,7 +6,7 @@ export const COMMAND = {
 }
 
 export const VALUE_TYPE = {
-  INTEGER: 'integer',
+  NUMBER: 'number',
   STRING: 'string'
 }
 
@@ -57,22 +57,22 @@ export const COMMAND_SCHEMA = {
       [
         {
           name: 'EX',
-          type: 'integer',
+          type: 'number',
           defaultValue: 0
         },
         {
           name: 'PX',
-          type: 'integer',
+          type: 'number',
           defaultValue: 0
         },
         {
           name: 'EXAT',
-          type: 'integer',
+          type: 'number',
           defaultValue: 0
         },
         {
           name: 'PXAT',
-          type: 'integer',
+          type: 'number',
           defaultValue: 0
         },
         {
@@ -102,7 +102,7 @@ export const COMMAND_SCHEMA = {
       },
       {
         name: 'increment',
-        type: 'integer',
+        type: 'number',
         defaultValue: 1
       }
     ],

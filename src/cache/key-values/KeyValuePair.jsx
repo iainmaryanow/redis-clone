@@ -2,7 +2,7 @@ import { Button } from 'semantic-ui-react'
 
 import KeyLabel from './KeyLabel'
 import ValueLabel from './ValueLabel'
-import getCommandsForValue from './getCommandsForValue'
+import getCommandsForValueType from './getCommandsForValueType'
 import styles from '../../styles.module.sass'
 
 const COMMAND_TO_PHRASE = {
@@ -10,19 +10,19 @@ const COMMAND_TO_PHRASE = {
   'SET': 'Update'
 }
 
-const KeyValuePair = ({ keyLabel, valueLabel, onCommandClick }) => {
-  const commandsForValue = getCommandsForValue(valueLabel)
+const KeyValuePair = ({ keyLabel, value, onCommandClick }) => {
+  const commandsForValue = getCommandsForValueType(value.type)
 
   return (
     <div className={styles.keyValuePairContainer}>
       <KeyLabel label={keyLabel} />
       :&nbsp;
-      <ValueLabel value={valueLabel} />
+      <ValueLabel value={value.value} type={value.type} />
 
       {
         commandsForValue.map((command) => {
           return (
-            <Button compact size='small' key={command} onClick={() => onCommandClick(command, keyLabel, valueLabel)}>
+            <Button compact size='small' key={command} onClick={() => onCommandClick(command, keyLabel, value.value)}>
               {COMMAND_TO_PHRASE[command]}
             </Button>
           )

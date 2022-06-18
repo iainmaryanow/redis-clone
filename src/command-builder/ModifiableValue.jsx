@@ -7,7 +7,7 @@ import styles from '../styles.module.sass'
 const INPUT_TYPE_MAPPING = {
   string: 'text',
   boolean: 'radio',
-  integer: 'number'
+  number: 'number'
 }
 
 const ModifiableValue = ({ valueDefinition, onChange }) => {

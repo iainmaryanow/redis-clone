@@ -1,10 +1,7 @@
 import { VALUE_TYPE } from '../../constants'
 import styles from '../../styles.module.sass'
-import getValueType from './getValueType'
 
-const ValueLabel = ({ value }) => {
-  const type = getValueType(value)
-
+const ValueLabel = ({ value, type }) => {
   return (
     <span className={`${styles.value} ${styles[type]}`}>
       {type === VALUE_TYPE.STRING && '"'}

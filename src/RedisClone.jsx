@@ -2,7 +2,6 @@ import { useReducer, createContext, useState } from 'react'
 
 import CommandBuilder from './command-builder/CommandBuilder'
 import Cache from './cache/Cache'
-import cacheReducer, { INITIAL_CACHE } from './reducers/cacheReducer'
 import commandReducer, { INITIAL_COMMAND } from './reducers/commandReducer'
 import sendCommand from './api/sendCommand'
 import Header from './header/Header'
@@ -10,8 +9,8 @@ import Header from './header/Header'
 export const CommandContext = createContext({})
 
 const RedisClone = () => {
-  const [cache, dispatchCache] = useReducer(cacheReducer, INITIAL_CACHE)
   const [command, dispatchCommand] = useReducer(commandReducer, INITIAL_COMMAND)
+  const [cache, setCache] = useState({})
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
@@ -26,7 +25,7 @@ const RedisClone = () => {
     try {
       const { data } = await sendCommand(command)
       createDisappearingHeader(setMessage, `Result of ${command.type}: ${data.value}`)
-      dispatchCache(command)
+      setCache(data.cache)
       dispatchCommand(INITIAL_COMMAND)
 
     } catch ({ response, message }) {
