@@ -4,10 +4,12 @@ import KeyLabel from './KeyLabel'
 import ValueLabel from './ValueLabel'
 import getCommandsForValueType from './getCommandsForValueType'
 import styles from '../../styles.module.sass'
+import Countdown from './Countdown'
+import { COMMAND } from '../../constants'
 
 const COMMAND_TO_PHRASE = {
-  'INCR': 'Increment',
-  'SET': 'Update'
+  [COMMAND.INCR]: 'Increment',
+  [COMMAND.SET]: 'Update'
 }
 
 const KeyValuePair = ({ keyLabel, value, onCommandClick }) => {
@@ -27,6 +29,10 @@ const KeyValuePair = ({ keyLabel, value, onCommandClick }) => {
             </Button>
           )
         })
+      }
+
+      {
+        value.timeoutRemainingSeconds && <Countdown startingValue={value.timeoutRemainingSeconds} />
       }
     </div>
   )

@@ -11,20 +11,14 @@ const get = async (ctx, next) => {
 }
 
 const set = async (ctx, next) => {
-  const { key, value, px, nx, xx, keepttl, get } = ctx.query
-
-  if ((nx && xx) || (px && keepttl)) {
-    ctx.status = 400
-    ctx.body = 'Invalid parameters'
-    return await next()
-  }
+  const { key, value, ex, px, nx, xx, keepttl, get } = ctx.query
 
   const oldValue = ctx.cache.get(key) ?? ''
 
   if ((nx && oldValue) || (xx && !oldValue)) {
     ctx.body = ''
   } else {
-    const isSuccessful = ctx.cache.set(key, value, px, keepttl)
+    const isSuccessful = ctx.cache.set(key, value, ex * 1000 || px, keepttl)
     ctx.body = get ? oldValue : isSuccessful
   }
 

@@ -15,7 +15,7 @@ const RedisClone = () => {
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
 
-  const onChangeCommand = (updates) => { dispatchCommand({ ...command, ...updates }); console.log(updates) }
+  const onChangeCommand = (updates) => dispatchCommand({ ...command, ...updates })
   const onNewCommand = (command, props) => dispatchCommand({ type: command, ...props })
 
   const createDisappearingHeader = (fn, content, timeout = 5000) => {
