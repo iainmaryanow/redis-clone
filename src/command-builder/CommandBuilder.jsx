@@ -22,6 +22,8 @@ const CommandBuilder = ({ onChangeCommand, onRunCommand }) => {
     return null
   }
 
+  const isRunCommandDisabled = () => schema.requiredValues.some(({ name }) => !command[name])
+
   return (
     <div className={styles.commandBuilder}>
       <span className={styles.commandName}>{command.type}</span>
@@ -45,6 +47,7 @@ const CommandBuilder = ({ onChangeCommand, onRunCommand }) => {
         loading={isLoading}
         className={styles.runCommand}
         onClick={runCommand}
+        disabled={isRunCommandDisabled()}
       />
     </div>
   )
