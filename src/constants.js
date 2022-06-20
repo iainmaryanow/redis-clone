@@ -1,8 +1,22 @@
 export const COMMAND = {
   PING: 'PING',
-  INCR: 'INCR',
   GET: 'GET',
-  SET: 'SET'
+  SET: 'SET',
+  INCR: 'INCR',
+  INCRBY: 'INCRBY',
+  DECR: 'DECR',
+  DECRBY: 'DECRBY',
+  STRLEN: 'STRLEN'
+}
+
+export const COMMAND_TO_PHRASE = {
+  [COMMAND.GET]: 'Get',
+  [COMMAND.SET]: 'Update',
+  [COMMAND.INCR]: 'Increment',
+  [COMMAND.INCRBY]: 'Increment by',
+  [COMMAND.DECR]: 'Decrement',
+  [COMMAND.DECRBY]: 'Decrement by',
+  [COMMAND.STRLEN]: 'String length'
 }
 
 export const VALUE_TYPE = {
@@ -11,8 +25,30 @@ export const VALUE_TYPE = {
   BOOLEAN: 'boolean'
 }
 
+export const VALUE_TYPE_TO_INPUT_TYPE = {
+  [VALUE_TYPE.STRING]: 'text',
+  [VALUE_TYPE.BOOLEAN]: 'radio',
+  [VALUE_TYPE.NUMBER]: 'number'
+}
+
+export const VALUE_TYPE_TO_COMMANDS = {
+  [VALUE_TYPE.NUMBER]: [COMMAND.INCR, COMMAND.INCRBY, COMMAND.DECR, COMMAND.DECRBY],
+  [VALUE_TYPE.STRING]: [COMMAND.SET, COMMAND.STRLEN]
+}
+
+export const COMMAND_TO_METHOD = {
+  [COMMAND.PING]: 'get',
+  [COMMAND.GET]: 'get',
+  [COMMAND.SET]: 'put',
+  [COMMAND.INCR]: 'put',
+  [COMMAND.INCRBY]: 'put',
+  [COMMAND.DECR]: 'put',
+  [COMMAND.DECRBY]: 'put',
+  [COMMAND.STRLEN]: 'get'
+}
+
 export const COMMAND_SCHEMA = {
-  GET: {
+  [COMMAND.GET]: {
     requiredValues: [
       {
         name: 'key',
@@ -22,7 +58,7 @@ export const COMMAND_SCHEMA = {
     ],
     optionalGroups: []
   },
-  SET: {
+  [COMMAND.SET]: {
     requiredValues: [
       {
         name: 'key',
@@ -84,7 +120,7 @@ export const COMMAND_SCHEMA = {
       ]
     ]
   },
-  INCR: {
+  [COMMAND.INCR]: {
     requiredValues: [
       {
         name: 'key',
@@ -94,7 +130,7 @@ export const COMMAND_SCHEMA = {
     ],
     optionalGroups: []
   },
-  INCRBY: {
+  [COMMAND.INCRBY]: {
     requiredValues: [
       {
         name: 'key',
@@ -105,6 +141,41 @@ export const COMMAND_SCHEMA = {
         name: 'increment',
         type: VALUE_TYPE.NUMBER,
         defaultValue: 1
+      }
+    ],
+    optionalGroups: []
+  },
+  [COMMAND.DECR]: {
+    requiredValues: [
+      {
+        name: 'key',
+        type: VALUE_TYPE.STRING,
+        defaultValue: ''
+      }
+    ],
+    optionalGroups: []
+  },
+  [COMMAND.DECRBY]: {
+    requiredValues: [
+      {
+        name: 'key',
+        type: VALUE_TYPE.STRING,
+        defaultValue: ''
+      },
+      {
+        name: 'decrement',
+        type: VALUE_TYPE.NUMBER,
+        defaultValue: 1
+      }
+    ],
+    optionalGroups: []
+  },
+  [COMMAND.STRLEN]: {
+    requiredValues: [
+      {
+        name: 'key',
+        type: VALUE_TYPE.STRING,
+        defaultValue: ''
       }
     ],
     optionalGroups: []

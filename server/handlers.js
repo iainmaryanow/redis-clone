@@ -27,7 +27,7 @@ const set = async (ctx, next) => {
 
 const incr = async (ctx, next) => {
   try {
-    ctx.body = ctx.cache.incr(ctx.query.key)
+    ctx.body = ctx.cache.incr(ctx.query.key, Number(ctx.query.increment ?? 1))
   } catch (error) {
     ctx.body = error.message
     ctx.status = 500
@@ -38,7 +38,7 @@ const incr = async (ctx, next) => {
 
 const decr = async (ctx, next) => {
   try {
-    ctx.body = ctx.cache.decr(ctx.query.key)
+    ctx.body = ctx.cache.decr(ctx.query.key, Number(ctx.query.decrement ?? 1))
   } catch (error) {
     ctx.body = error.message
     ctx.status = 500

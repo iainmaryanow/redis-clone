@@ -2,18 +2,12 @@ import { Button } from 'semantic-ui-react'
 
 import KeyLabel from './KeyLabel'
 import ValueLabel from './ValueLabel'
-import getCommandsForValueType from './getCommandsForValueType'
 import styles from '../../styles.module.sass'
 import Countdown from './Countdown'
-import { COMMAND } from '../../constants'
-
-const COMMAND_TO_PHRASE = {
-  [COMMAND.INCR]: 'Increment',
-  [COMMAND.SET]: 'Update'
-}
+import { VALUE_TYPE_TO_COMMANDS, COMMAND_TO_PHRASE } from '../../constants'
 
 const KeyValuePair = ({ keyLabel, value, onCommandClick }) => {
-  const commandsForValue = getCommandsForValueType(value.type)
+  const commandsForValue = VALUE_TYPE_TO_COMMANDS[value.type] ?? []
 
   return (
     <div className={styles.keyValuePairContainer}>

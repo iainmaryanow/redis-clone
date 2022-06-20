@@ -1,15 +1,9 @@
 import { useContext } from 'react'
 import { Input } from 'semantic-ui-react'
-import { VALUE_TYPE } from '../constants'
 
 import { CommandContext } from '../RedisClone'
 import styles from '../styles.module.sass'
-
-const INPUT_TYPE_MAPPING = {
-  [VALUE_TYPE.STRING]: 'text',
-  [VALUE_TYPE.BOOLEAN]: 'radio',
-  [VALUE_TYPE.NUMBER]: 'number'
-}
+import { VALUE_TYPE_TO_INPUT_TYPE, VALUE_TYPE } from '../constants'
 
 const ModifiableValue = ({ valueDefinition, onChange }) => {
   const command = useContext(CommandContext)
@@ -35,7 +29,7 @@ const ModifiableValue = ({ valueDefinition, onChange }) => {
       <Input
         size='mini'
         value={command[name]}
-        type={INPUT_TYPE_MAPPING[type]}
+        type={VALUE_TYPE_TO_INPUT_TYPE[type]}
         placeholder={defaultValue}
         className={styles.valueInput}
         onChange={({ target }) => onChange({ [name]: getTargetValue(target) })}

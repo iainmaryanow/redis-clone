@@ -1,3 +1,3 @@
-const KeyLabel = ({ label }) => <span>{'"'}{label}{'"'}</span>
+const KeyLabel = ({ label }) => <span>{`"${label}"`}</span>
 
 export default KeyLabel

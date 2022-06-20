@@ -6,14 +6,13 @@ router.get('/PING', ping)
 router.get('/GET', get)
 router.put('/SET', set)
 router.put('/INCR', incr)
+router.put('/INCRBY', incr)
 router.put('/DECR', decr)
+router.put('/DECRBY', decr)
 router.get('/STRLEN', strlen)
 
 router.use(async (ctx, next) => {
-  ctx.body = {
-    value: ctx.body,
-    cache: ctx.cache.serialize()
-  }
+  ctx.body = { value: ctx.body, cache: ctx.cache.serialize() }
   await next()
 })
 

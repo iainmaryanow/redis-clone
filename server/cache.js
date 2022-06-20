@@ -30,14 +30,14 @@ const set = (key, value, expirationTimeMs = null, keepTimeout = false) => {
   }
 }
 
-const incr = (key) => {
+const incr = (key, increment) => {
   if (!cache.hasOwnProperty(key)) {
     cache[key] = { value: 0, timeout: null }
   }
 
   const { value } = cache[key]
   if (isPotentialInteger(value)) {
-    const newValue = parseInt(Number(value)) + 1
+    const newValue = parseInt(Number(value)) + increment
     cache[key].value = newValue
     return newValue
   }
@@ -45,14 +45,14 @@ const incr = (key) => {
   throw new Error(`The value '${value}' for the key '${key}' is not an integer`)
 }
 
-const decr = (key) => {
+const decr = (key, decrement) => {
   if (!cache.hasOwnProperty(key)) {
     cache[key] = { value: 0, timeout: null }
   }
 
   const { value } = cache[key]
   if (isPotentialInteger(value)) {
-    const newValue = parseInt(Number(value)) + 1
+    const newValue = parseInt(Number(value)) - decrement
     cache[key].value = newValue
     return newValue
   }
